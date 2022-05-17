@@ -11,3 +11,7 @@ https://github.com/robmanuel/Searching-Hidden-Initials-Thesis/blob/main/academic
 
 The file is too big to display inside GitHub and you'll need to download it and look at it in a text editor ok?
 
+The write-up is on SubStack:
+https://robmanuelfuckyeah.substack.com/p/searching-32-million-academic-papers?s=w
+
+And thanks to Happy Toast and Ballymoran for title suggestions.

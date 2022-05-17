@@ -6,7 +6,10 @@ import json
 
 #CONFIG STUFF
 
-filename='../../../unpaywall_snapshot_2022-03-09T083001.jsonl' # data from here https://unpaywall.org/products/snapshot
+# data from here https://unpaywall.org/products/snapshot - this is 130GB when expanded, make sure you have the space
+filename='../../../unpaywall_snapshot_2022-03-09T083001.jsonl' 
+
+# this list of swears is hardly definitive but it's quickly going to rack up CPU time with a bigger list
 swears="fuck piss shit cunt wank bastard penis cock vagina bugger bollock crap arse bitch fanny clunge gash prick minge stupid rubbish"
 
 
@@ -15,6 +18,10 @@ swears="fuck piss shit cunt wank bastard penis cock vagina bugger bollock crap a
 swears=swears.lower().split(" ")
 
 def acro(title):
+	# expects a string and returns an acronyn
+	# removes non A-Z chars but treats hyphens as start of new word
+	# makes everything lowercase in hope that we ultimately compare like with like
+	 
 	title = title.replace("-", " ")
 	title = title.replace("—", " ")
 	title = re.sub(r"[^a-zA-Z ]+", "", title)
@@ -26,6 +33,10 @@ def acro(title):
 
 
 def checkswear(title):
+	# send it a string and it'll return swears listed in them
+	# separated by a space, or return False if nothing is there
+	# swears are defined as globals at the top baby
+	
 	ret=""
 	for swear in swears:
 		if swear in title:
@@ -37,6 +48,9 @@ def checkswear(title):
 		return ret.strip()
 
 def reporton(title):
+	# send this a string and it'll send to standard out a report if it finds a swear in it
+	# and say nothing if there's nothing to say
+	 
 	if len(str(title))>0:
 		a=acro(title)
 		cs=checkswear(a)
@@ -59,7 +73,8 @@ def reporton(title):
 	else:
 		return False
 
-
+# this is the main loop that's going to loop through the file, probably should sit in a MAIN thingie coz that's how you're meant to do shit init
+# to make the output readable, you'll want to sort the output which I'm choosing to do in BBedit but you could do it with code if you want to
 
 data = []
 with open(filename) as f:

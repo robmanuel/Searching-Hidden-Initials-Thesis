@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # This code will sort through a json file and look for swears assuming each line of the json has a element marked 'title'
-
+#%%
 import re
 import json
 
@@ -8,6 +8,7 @@ import json
 
 # data from here https://unpaywall.org/products/snapshot - this is 25GB compressed (each line can be decompressed individually)
 filename='../../../unpaywall_snapshot_2022-03-09T083001.jsonl' 
+filename=r"G:/tt/unpaywall/unpaywall_snapshot_2022-03-09T083001.jsonl.gz"
 
 # this list of swears is hardly definitive but it's quickly going to rack up CPU time with a bigger list
 swears="fuck piss shit cunt wank bastard penis cock vagina bugger bollock crap arse bitch fanny clunge gash prick minge stupid rubbish"
@@ -15,8 +16,13 @@ swears="fuck piss shit cunt wank bastard penis cock vagina bugger bollock crap a
 
 #HERE BE DRAGONS - the actual code
 
-swears=swears.lower().split(" ")
+swears_forward = swears.lower().split(" ")
+swears_reversed = swears[::-1].lower().split(" ")
 
+results_forward = []
+results_reversed = []
+
+#%%
 def acro(title):
 	# expects a string and returns an acronyn
 	# removes non A-Z chars but treats hyphens as start of new word
@@ -38,10 +44,15 @@ def checkswear(title):
 	# swears are defined as globals at the top baby
 	
 	ret=""
-	for swear in swears:
+	for swear in swears_forward:
 		if swear in title:
 			ret=ret+swear+" "
-
+			results_forward.append((swear, title))
+	retrev=""
+	for swear in swears_reversed:
+		if swear in title:
+			retrev=retrev+swear+" "
+			results_reversed.append((swear, title))
 	if len(ret)==0:
 		return False
 	else:
@@ -77,9 +88,13 @@ def reporton(title):
 # to make the output readable, you'll want to sort the output which I'm choosing to do in BBedit but you could do it with code if you want to
 
 import gzip
+
 with gzip.open(filename,'rt') as f:
 	for line in f:
 		l= json.loads(line)
 		title=l["title"]
 		if title is not None:
 			reporton (title)
+print(len(results_forward))
+print(len(results_reversed))
+# %%

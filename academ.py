@@ -6,7 +6,7 @@ import json
 
 #CONFIG STUFF
 
-# data from here https://unpaywall.org/products/snapshot - this is 130GB when expanded, make sure you have the space
+# data from here https://unpaywall.org/products/snapshot - this is 25GB compressed (each line can be decompressed individually)
 filename='../../../unpaywall_snapshot_2022-03-09T083001.jsonl' 
 
 # this list of swears is hardly definitive but it's quickly going to rack up CPU time with a bigger list
@@ -76,8 +76,8 @@ def reporton(title):
 # this is the main loop that's going to loop through the file, probably should sit in a MAIN thingie coz that's how you're meant to do shit init
 # to make the output readable, you'll want to sort the output which I'm choosing to do in BBedit but you could do it with code if you want to
 
-data = []
-with open(filename) as f:
+import gzip
+with gzip.open(filename,'rt') as f:
 	for line in f:
 		l= json.loads(line)
 		title=l["title"]

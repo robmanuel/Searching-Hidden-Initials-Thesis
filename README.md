@@ -1,4 +1,10 @@
 # Searching-Hidden-Initials-Thesis
+## PubMed Enabled Notification Information System with Bundled Unit Manipulation Sequence
+A fork of Rob Manuel's SHIT study. Added the following features:
+1. Scrape titles from PubMed: no longer require a local download of  DOI datasets. Can set a range of articles to check, pick a random sample of articles, or both.
+2. Set dataset of words to look for. Defaults to original swears. Can point this to any list of words in .txt or .csv format. 
+
+
 Study Organising Academic Papers Yielding Targetted Initials Towards Word Applicability - ‘Naughty Knowledgebase’
 
 Over on the @fesshole Twitter account that I run there was an interesting confession someone submitted which said "When I publish serious academic research papers, I try to get the initial letters of the title to spell something obscene."
